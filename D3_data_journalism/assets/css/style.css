@@ -9,17 +9,6 @@ html {
   min-height: 100%;
 }
 
-.chart::before {
-  position: absolute;
-  top: 50px;
-  left: 300px;
-  z-index: -1;
-  display: block;
-  width: 400px;
-  height: 300px;
-  content: " ";
-}
-
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;

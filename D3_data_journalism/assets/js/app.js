@@ -77,23 +77,7 @@ function renderYAxes(newYScale, yAxis) {
 
 // function used for updating circles group with a transition to
 // new circles
-function renderCircles(circleLabels, circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
-
-    var circleLabels = chartGroup.selectAll(null).data(censusData).enter().append("text");
-    
-    circleLabels
-        .attr("x", function(d) {
-        return xLinearScale(d[chosenXAxis]);
-        })
-        .attr("y", function(d) {
-        return yLinearScale(d[chosenYAxis]);
-        })
-        .text(function(d) {
-        return d.abbr;
-        })
-        .attr("font-size", "10px")
-        .attr("text-anchor", "middle")
-        .attr("fill", "black");
+function renderCircles(circlesGroup, newXScale, chosenXAxis, newYScale, chosenYAxis) {
 
     circlesGroup.transition()
         .duration(1000)
@@ -293,7 +277,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 yAxis = renderYAxes(yLinearScale, yAxis);
 
                 // updates circles with new x values
-                circlesGroup = renderCircles(circleLabels, circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+                circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
                 // updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
@@ -360,7 +344,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
                 yAxis = renderYAxes(yLinearScale, yAxis);
 
                 // updates circles with new y values
-                circlesGroup = renderCircles(circleLabels, circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
+                circlesGroup = renderCircles(circlesGroup, xLinearScale, chosenXAxis, yLinearScale, chosenYAxis);
 
                 // updates tooltips with new info
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circlesGroup);
