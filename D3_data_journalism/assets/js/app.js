@@ -31,8 +31,8 @@ var chosenYAxis = "obesity";
 function xScale(censusData, chosenXAxis) {
     // create scales
     var xLinearScale = d3.scaleLinear()
-        .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.9,
-        d3.max(censusData, d => d[chosenXAxis]) * 1.1
+        .domain([d3.min(censusData, d => d[chosenXAxis]) * 0.85,
+        d3.max(censusData, d => d[chosenXAxis]) * 1.15
         ])
         .range([0, width]);
 
@@ -44,8 +44,8 @@ function xScale(censusData, chosenXAxis) {
 function yScale(censusData, chosenYAxis) {
     // create scales
     var yLinearScale = d3.scaleLinear()
-        .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.9,
-        d3.max(censusData, d => d[chosenYAxis]) * 1.1
+        .domain([d3.min(censusData, d => d[chosenYAxis]) * 0.85,
+        d3.max(censusData, d => d[chosenYAxis]) * 1.15
         ])
         .range([height, 0]);
 
@@ -92,7 +92,7 @@ function renderLabels(circleLabels, newXScale, chosenXAxis, newYScale, chosenYAx
     circleLabels.transition()
         .duration(1000)
         .attr("x", d => newXScale(d[chosenXAxis]))
-        .attr("y", d => newYScale(d[chosenYAxis]));
+        .attr("y", d => newYScale(d[chosenYAxis]) + 3);
 
     return circleLabels;
 }
@@ -126,7 +126,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     var toolTip = d3.tip()
         .attr("class", "tooltip")
-        .offset([80, -60])
+        // .offset([80, -60])
         .html(function (d) {
             return (`${d.state}<br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}`);
         });
@@ -185,9 +185,9 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
         .enter()
         .append("text")
         .attr("x", d => xLinearScale(d[chosenXAxis]))
-        .attr("y", d => yLinearScale(d[chosenYAxis]))
+        .attr("y", d => yLinearScale(d[chosenYAxis]) + 3)
         .text(d => d.abbr)
-        .attr("font-size", "10px")
+        .attr("font-size", "9px")
         .attr("text-anchor", "middle")
         .attr("fill", "black");
 
@@ -197,7 +197,7 @@ d3.csv("assets/data/data.csv").then(function (censusData, err) {
         .append("circle")
         .attr("cx", d => xLinearScale(d[chosenXAxis]))
         .attr("cy", d => yLinearScale(d[chosenYAxis]))
-        .attr("r", 15)
+        .attr("r", 10)
         .attr("fill", "aqua")
         .attr("opacity", ".5");
 
