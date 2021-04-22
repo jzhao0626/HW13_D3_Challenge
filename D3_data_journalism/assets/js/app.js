@@ -126,7 +126,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
     var toolTip = d3.tip()
         .attr("class", "tooltip")
-        // .offset([80, -60])
+        .offset([80, -80])
         .html(function (d) {
             return (`${d.state}<br>${xlabel} ${d[chosenXAxis]}<br>${ylabel} ${d[chosenYAxis]}`);
         });
@@ -134,7 +134,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
     circlesGroup.call(toolTip);
 
     circlesGroup.on("mouseover", function (data) {
-        toolTip.show(data);
+        toolTip.show(data, this);
     })
         // onmouseout event
         .on("mouseout", function (data, index) {
